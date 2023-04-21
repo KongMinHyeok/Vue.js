@@ -1,7 +1,7 @@
 <template>
   <main>
     <ul>
-      <Item></Item>
+      <Item />
     </ul>
   </main>
 </template>
@@ -30,7 +30,7 @@ main > ul {
   width: 100%;
   height: auto;
   list-style: none;
-  padding-left: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -38,10 +38,14 @@ main > ul > li {
   width: 100%;
   height: 40px;
   line-height: 40px;
-  padding-left: 6px;
-  margin: 6px 0;
+  padding-left: 10px;
+  margin-bottom: 6px;
   box-sizing: border-box;
   background-color: white;
+}
+
+main > ul > li > i {
+  color: #62acde;
 }
 
 main > ul > li > button {

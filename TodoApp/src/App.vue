@@ -1,5 +1,4 @@
 <template>
-  <h3>TodoApp</h3>
   <Header v-on:addTodo="addTodoHandler"></Header>
   <Main></Main>
   <Footer></Footer>
@@ -21,10 +20,9 @@ export default {
     const store = useStore();
 
     const addTodoHandler = (value) => {
-      alert(value);
+      // vuex store 저장
       store.dispatch("addTodo", value);
     };
-
     return { addTodoHandler };
   },
 };

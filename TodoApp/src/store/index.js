@@ -19,7 +19,7 @@ const store = createStore({
     addTodo(context, todo) {
       context.commit("ADD_TODO", todo);
     },
-    removeTOdo(context, index) {
+    removeTodo(context, index) {
       context.commit("REMOVE_TODO", index);
     },
     clearTodo(context) {
@@ -27,7 +27,7 @@ const store = createStore({
     },
   },
   getters: {
-    getTodos(state) {
+    todos(state) {
       return state.todos;
     },
   },

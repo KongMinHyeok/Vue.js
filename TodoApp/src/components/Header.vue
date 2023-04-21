@@ -52,6 +52,7 @@ header > div > input {
   height: 100%;
   padding: 6px;
   box-sizing: border-box;
+  border: none;
   outline: none;
 }
 

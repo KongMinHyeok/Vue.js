@@ -1,23 +1,36 @@
 <template>
-  <h3>Footer</h3>
+  <footer>
+    <button @click="btnClear">Clear All</button>
+  </footer>
 </template>
 <script>
+import { useStore } from "vuex";
+
 export default {
   name: "Footer",
   setup() {
-    return {};
+    const store = useStore();
+
+    const btnClear = () => {
+      alert("clear");
+
+      store.dispatch("clearTodo");
+    };
+    return { btnClear };
   },
 };
 </script>
 <style scoped>
 footer {
-  width: 100px;
+  width: 100%;
   height: auto;
   text-align: center;
 }
 footer > button {
   width: 100px;
   height: 30px;
-  color: #e20303;
+  background-color: #e20303;
+  border: none;
+  color: white;
 }
 </style>
