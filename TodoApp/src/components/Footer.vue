@@ -13,13 +13,13 @@ export default {
 
     const btnClear = () => {
       alert("clear");
-
       store.dispatch("clearTodo");
     };
     return { btnClear };
   },
 };
 </script>
+
 <style scoped>
 footer {
   width: 100%;
