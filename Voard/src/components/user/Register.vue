@@ -19,10 +19,28 @@
                       variant="outlined"
                       density="compact"
                       hide-details="true"
+                      v-model="user.uid"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="6">
-                    <v-btn color="success">중복확인</v-btn>
+                    <v-btn color="success" @click="btnCheckUid">중복확인</v-btn>
+                    <v-chip
+                      v-if="isAreadyUid"
+                      class="ma-2"
+                      color="red"
+                      text-color="white"
+                    >
+                      이미 사용중인 아이디 입니다.
+                    </v-chip>
+
+                    <v-chip
+                      v-if="isReadyUid"
+                      class="ma-2"
+                      color="green"
+                      text-color="white"
+                    >
+                      사용 가능한 아이디 입니다.
+                    </v-chip>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -32,6 +50,7 @@
                       variant="outlined"
                       density="compact"
                       hide-details="true"
+                      v-model="user.pass1"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="6"></v-col>
@@ -43,6 +62,7 @@
                       variant="outlined"
                       density="compact"
                       hide-details="true"
+                      v-model="user.pass2"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="6"></v-col>
@@ -64,6 +84,7 @@
                       variant="outlined"
                       density="compact"
                       hide-details="true"
+                      v-model="user.name"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="6"></v-col>
@@ -75,6 +96,7 @@
                       variant="outlined"
                       density="compact"
                       hide-details="true"
+                      v-model="user.nick"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="6">
@@ -88,6 +110,7 @@
                       variant="outlined"
                       density="compact"
                       hide-details="true"
+                      v-model="user.email"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="6"></v-col>
@@ -99,6 +122,7 @@
                       variant="outlined"
                       density="compact"
                       hide-details="true"
+                      v-model="user.hp"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="6"></v-col>
@@ -153,15 +177,60 @@
   </v-app>
 </template>
 <script setup>
+import userStore from "@/store/user";
 import { useRouter } from "vue-router";
+import { reactive } from "vue";
+import axios from "axios";
+import { loadConfigFromFile } from "vite";
 
 const router = useRouter();
+
+const user = reactive()({
+  uid: null,
+  pass1: null,
+  pass2: null,
+  name: null,
+  nick: null,
+  email: null,
+  hp: null,
+  zip: null,
+  addr1: null,
+  addr2: null,
+});
 
 const btnCancel = () => {
   router.push("/user/login");
 };
 const btnRegister = () => {
   router.push("/list");
+};
+
+const rsChip1 = ref(false);
+const rsChip2 = ref(false);
+const loading = ref(false);
+
+const btnCheckUid = () => {
+  loadingValue.axios
+    .get("http://localhost:8080/Voard/user/countUid", {
+      params: { uid: user.uid },
+    })
+    .then((response) => {
+      setTimeout(() => {
+        loading.value = false;
+
+        console.log(response);
+
+        if (response.data > 0) {
+          rsChip1.value = true;
+          rsChip2.value = false;
+        } else {
+          rsChip1.value = false;
+          rsChip2.value = true;
+        }
+      }, 500).catch((error) => {
+        console.log(error);
+      });
+    });
 };
 </script>
 <style scoped></style>
