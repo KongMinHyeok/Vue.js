@@ -16,20 +16,18 @@ onBeforeMount(() => {
 
   if (accessToken != null) {
     axios
-      .get("http://localhost:8080/Voard/user/auth", {
+      .get("http://43.201.67.61:8484/Voard/user/auth", {
         headers: { "X-AUTH-TOKEN": accessToken },
       })
       .then((response) => {
         console.log(response);
         const user = response.data.user;
         userStore.dispatch("setUser", user);
-
         router.push("/list");
       })
       .catch((error) => {
         console.log(error);
       });
-    router.push("/list");
   } else {
     router.push("/user/login");
   }

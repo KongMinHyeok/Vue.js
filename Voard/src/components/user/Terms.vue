@@ -57,6 +57,7 @@ const state = reactive({
 const btnCancel = () => {
   router.push("/user/login");
 };
+
 const btnNext = () => {
   if (state.isCheck1 && state.isCheck2) {
     router.push("/user/register");
@@ -67,10 +68,11 @@ const btnNext = () => {
 
 onBeforeMount(() => {
   axios
-    .get("http://localhost:8080/Voard/user/terms")
+    .get("http://43.201.67.61:8484/Voard/user/terms")
     .then((response) => {
       console.log(response);
       state.data = response.data;
+      //data.privacy = response.data.privacy;
     })
     .catch((error) => {
       console.log(error);
