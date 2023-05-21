@@ -38,7 +38,7 @@ const store = createStore({
       };
 
       axios
-        .post("http://localhost:8383/todo", data)
+        .post("http://43.201.67.61:8383/todo", data)
         .then((response) => {
           context.commit("ADD_TODO", data);
         })
@@ -48,7 +48,7 @@ const store = createStore({
     },
     removeTodo(context, data) {
       axios
-        .delete("http://localhost:8383/remove", {
+        .delete("http://43.201.67.61:8383/remove", {
           params: { no: data.no },
         })
         .then((response) => {
@@ -60,7 +60,7 @@ const store = createStore({
     },
     clearTodo(context) {
       axios
-        .delete("http://localhost:8383/clear")
+        .delete("http://43.201.67.61:8383/clear")
         .then((response) => {
           context.commit("CLEAR_TODO");
         })
